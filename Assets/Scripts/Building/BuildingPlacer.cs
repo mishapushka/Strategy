@@ -33,10 +33,28 @@ public class BuildingPlacer : MonoBehaviour
 
         CurrentBuilding.transform.position = new Vector3(x, 0, z) * CellSize;
 
-        if (Input.GetMouseButtonDown(0)) {
-            InstallBuilding(x, z, CurrentBuilding);
-            CurrentBuilding = null;
+        // красный дом или нет когда ставишь друг на друга
+        if (CheckAllow(x, z, CurrentBuilding)) {
+            CurrentBuilding.DisplayAcceptablePosition();
+            if (Input.GetMouseButtonDown(0)) {
+                InstallBuilding(x, z, CurrentBuilding);
+                CurrentBuilding = null;
+            }
+        } else {
+            CurrentBuilding.DisplayUnacceptablePosition();
         }
+    }
+
+    bool CheckAllow(int xPosition, int zPosition, Building building) {
+        for (int x = 0; x < building.XSize; x++) {
+            for (int z = 0; z < building.ZSize; z++) {
+                Vector2Int coordinate = new Vector2Int(xPosition + x, zPosition + z);
+                if (BuildingDictionary.ContainsKey(coordinate)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     void InstallBuilding(int xPosition, int zPosition, Building building) {
@@ -46,10 +64,10 @@ public class BuildingPlacer : MonoBehaviour
                 BuildingDictionary.Add(coordinate, CurrentBuilding);
             }
         }
-
-        foreach (var item in BuildingDictionary) {
-            Debug.Log(item);
-        }
+        // выводит в консоль ошибку когда строишь здание поверх другого
+        //foreach (var item in BuildingDictionary) {
+        //    Debug.Log(item);
+        //}
     }
 
     public void CreateBuilding(GameObject buildingPrefab) {
