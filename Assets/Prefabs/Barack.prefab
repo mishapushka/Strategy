@@ -50,6 +50,7 @@ MonoBehaviour:
   Price: 10
   XSize: 4
   ZSize: 4
+  Renderer: {fileID: 6879606989354138767}
 --- !u!1 &5292114570464444295
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,5 +225,10 @@ PrefabInstance:
 --- !u!4 &5691396904520470537 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5d132c05a74e59f4f995d21c285fd0c7, type: 3}
+  m_PrefabInstance: {fileID: 5292114571334399970}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &6879606989354138767 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7635826562936255635, guid: 5d132c05a74e59f4f995d21c285fd0c7, type: 3}
   m_PrefabInstance: {fileID: 5292114571334399970}
   m_PrefabAsset: {fileID: 0}

@@ -148,6 +148,7 @@ MonoBehaviour:
   Price: 5
   XSize: 3
   ZSize: 3
+  Renderer: {fileID: 1044944175693466109}
 --- !u!1001 &1767798108837888656
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -221,6 +222,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7e27b9b7df06fe47819c7db0f552866, type: 3}
+--- !u!23 &1044944175693466109 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7635826562936255635, guid: b7e27b9b7df06fe47819c7db0f552866, type: 3}
+  m_PrefabInstance: {fileID: 1767798108837888656}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2234562215734584699 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b7e27b9b7df06fe47819c7db0f552866, type: 3}
