@@ -5,7 +5,7 @@ using UnityEngine;
 public class SelectableObject : MonoBehaviour {
     public GameObject SelectionIndicator;
 
-    private void Start() {
+    public virtual void Start() {
         SelectionIndicator.SetActive(false);
     }
 

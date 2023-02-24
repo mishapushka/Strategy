@@ -12,6 +12,13 @@ public class Building : SelectableObject
     private Color _startColor;
     public Renderer Renderer;
 
+    public GameObject MenuObject;
+
+    public override void Start() {
+        base.Start();
+        MenuObject.SetActive(false);
+    }
+
     private void Awake() {
         _startColor = Renderer.material.color;
     }
@@ -24,6 +31,16 @@ public class Building : SelectableObject
                 Gizmos.DrawWireCube(transform.position + new Vector3(x, 0, z) * cellSize, new Vector3(1f, 0f, 1f) * cellSize);
             }
         }
+    }
+
+    public override void Select() {
+        base.Select();
+        MenuObject.SetActive(true);
+    }
+
+    public override void UnSelect() {
+        base.UnSelect();
+        MenuObject.SetActive(false);
     }
 
     public void DisplayUnacceptablePosition() {

@@ -694,7 +694,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BuildingPlacer: {fileID: 1677828426}
-  BuildingPrefab: {fileID: 1767798108789057421, guid: d9d9e01ce21534a48968af67b3359c17, type: 3}
+  BuildingPrefab: {fileID: 7219098207273226346, guid: d9d9e01ce21534a48968af67b3359c17, type: 3}
 --- !u!114 &414349853
 MonoBehaviour:
   m_ObjectHideFlags: 0
