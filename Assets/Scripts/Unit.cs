@@ -4,7 +4,10 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class Unit : SelectableObject {
+
     public NavMeshAgent NavMeshAgent;
+    public int Price;
+
     public override void WhenClickOnGround(Vector3 point) {
         base.WhenClickOnGround(point);
 
