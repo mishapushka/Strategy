@@ -401,9 +401,9 @@ PrefabInstance:
       value: Knight
       objectReference: {fileID: 0}
     - target: {fileID: 2416432385540069662, guid: 96c738e3c99bf404c99832190cc6032a, type: 3}
-      propertyPath: Health
-      value: 5
-      objectReference: {fileID: 0}
+      propertyPath: HealthbarPrefab
+      value: 
+      objectReference: {fileID: 5444745345018843922, guid: 4269f3aa9487666428be356303647036, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96c738e3c99bf404c99832190cc6032a, type: 3}
 --- !u!1 &342391508
