@@ -15,6 +15,8 @@ public class Enemy : MonoBehaviour {
 
     public EnemyState CurrentEnemyState;
     public int Health;
+    private int _maxHealth;
+
     public Building TargetBuilding;
     public Unit TargetUnit;
     public float DistanceToFollow = 7f;
@@ -25,12 +27,24 @@ public class Enemy : MonoBehaviour {
     public float AttackPeriod = 1f;
     private float _timer;
 
+    public GameObject HealthbarPrefab;
+    private HealthBar _healthBar;
+
     private void Start() {
         SetState(EnemyState.WalkToBuilding);
+
+        _maxHealth = Health;
+        GameObject healthBar = Instantiate(HealthbarPrefab);
+        _healthBar = healthBar.GetComponent<HealthBar>();
+        _healthBar.Setup(transform);
     }
 
     private void Update() {
         if (CurrentEnemyState == EnemyState.Idle) {
+            FindClosestBuilding();
+            if (TargetBuilding) {
+                SetState(EnemyState.WalkToBuilding);
+            }
             FindClosestUnits();
         } else if (CurrentEnemyState == EnemyState.WalkToBuilding) {
             FindClosestUnits();
@@ -58,6 +72,8 @@ public class Enemy : MonoBehaviour {
         } else if (CurrentEnemyState == EnemyState.Attack) {
 
             if (TargetUnit) {
+                NavMeshAgent.SetDestination(TargetUnit.transform.position);
+
                 // перестает атаковать и за ним идет
                 float distance = Vector3.Distance(transform.position, TargetUnit.transform.position);
                 if (distance > DistanceToAttack) {
@@ -81,7 +97,12 @@ public class Enemy : MonoBehaviour {
 
         } else if (CurrentEnemyState == EnemyState.WalkToBuilding) {
             FindClosestBuilding();
-            NavMeshAgent.SetDestination(TargetBuilding.transform.position);
+            if (TargetBuilding) {
+                NavMeshAgent.SetDestination(TargetBuilding.transform.position);
+            } else {
+                SetState(EnemyState.Idle);
+            }
+            
         } else if (CurrentEnemyState == EnemyState.WalkToUnit) {
 
         } else if (CurrentEnemyState == EnemyState.Attack) {
@@ -137,4 +158,19 @@ public class Enemy : MonoBehaviour {
         Handles.DrawWireDisc(transform.position, Vector3.up, DistanceToFollow);
     }
 #endif
+
+    public void TakeDamage(int damageValue) {
+        Health -= damageValue;
+        _healthBar.SetHealth(Health, _maxHealth);
+        if (Health <= 0) {
+            // Die
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnDestroy() {
+        if (_healthBar) {
+            Destroy(_healthBar.gameObject);
+        }
+    }
 }
