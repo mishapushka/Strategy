@@ -162,7 +162,12 @@ MonoBehaviour:
   NavMeshAgent: {fileID: 7901402190133230282}
   Price: 5
   Health: 5
-  HealthbarPrefab: {fileID: 2798809981604516770, guid: 4269f3aa9487666428be356303647036, type: 3}
+  HealthbarPrefab: {fileID: 5444745345018843922, guid: 4269f3aa9487666428be356303647036, type: 3}
+  CurrentUnitState: 0
+  TargetEnemy: {fileID: 0}
+  DistanceToFollow: 7
+  DistanceToAttack: 1
+  AttackPeriod: 1
 --- !u!195 &7901402190133230282
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -173,11 +178,11 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.4
-  m_Speed: 6
-  m_Acceleration: 8
+  m_Speed: 2
+  m_Acceleration: 50
   avoidancePriority: 50
   m_AngularSpeed: 600
-  m_StoppingDistance: 1
+  m_StoppingDistance: 0.8
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
