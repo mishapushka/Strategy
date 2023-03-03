@@ -9,7 +9,7 @@ public class Barack : Building
 
     public void CreateUnit(GameObject unitPrefab) {
         GameObject newUnit = Instantiate(unitPrefab, Spawn.position, Quaternion.identity);
-        Vector3 position = Spawn.position + new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f));
+        Vector3 position = Spawn.position + new Vector3(Random.Range(-2f, 2f), 0f, Random.Range(-2f, 2f));
         newUnit.GetComponent<Unit>().WhenClickOnGround(position);
     }
 }
