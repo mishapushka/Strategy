@@ -76,12 +76,13 @@ public class Knight : Unit
     public void SetState(UnitState unitState) {
         CurrentUnitState = unitState;
         if (CurrentUnitState == UnitState.Idle) {
-
+            NavMeshAgent.stoppingDistance = 0.2f;
         } else if (CurrentUnitState == UnitState.WalkToPoint) {
-
+            NavMeshAgent.stoppingDistance = 0.05f;
         } else if (CurrentUnitState == UnitState.WalkToEnemy) {
-
+            NavMeshAgent.stoppingDistance = 1f;
         } else if (CurrentUnitState == UnitState.Attack) {
+            NavMeshAgent.stoppingDistance = 1f;
             _timer = 0;
         }
     }

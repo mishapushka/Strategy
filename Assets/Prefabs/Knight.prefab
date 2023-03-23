@@ -160,7 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SelectionIndicator: {fileID: 2206702398903880218}
   NavMeshAgent: {fileID: 7901402190133230282}
-  Price: 5
+  Price: 1
   Health: 5
   HealthbarPrefab: {fileID: 5444745345018843922, guid: 4269f3aa9487666428be356303647036, type: 3}
   CurrentUnitState: 0
