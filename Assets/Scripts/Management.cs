@@ -62,8 +62,16 @@ public class Management : MonoBehaviour {
 
             if (Input.GetMouseButtonUp(0)) {
                 if (hit.collider.tag == "Ground") {
+                    // делаем растановку персонажей
+                    int rowNumber = Mathf.CeilToInt(Mathf.Sqrt(ListOfSelected.Count));
+
                     for (int i = 0; i < ListOfSelected.Count; i++) {
-                        ListOfSelected[i].WhenClickOnGround(hit.point);
+                        
+                        int row = i / rowNumber;
+                        int column = i % rowNumber;
+
+                        Vector3 point = hit.point + new Vector3(row, 0f, column);
+                        ListOfSelected[i].WhenClickOnGround(point);
                     }
                 }
             }
@@ -123,6 +131,12 @@ public class Management : MonoBehaviour {
         if (ListOfSelected.Contains(selectableObject) == false) {
             ListOfSelected.Add(selectableObject);
             selectableObject.Select();
+        }
+    }
+
+    public void Unselect(SelectableObject selectableObject) {
+        if (ListOfSelected.Contains(selectableObject)) {
+            ListOfSelected.Remove(selectableObject);
         }
     }
 
