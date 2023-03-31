@@ -19,6 +19,7 @@ public class Knight : Unit
     public Enemy TargetEnemy;
     public float DistanceToFollow = 7f;
     public float DistanceToAttack = 1f;
+    public Vector3 TargetPoint;
 
     public float AttackPeriod = 1f;
     private float _timer;
@@ -33,6 +34,9 @@ public class Knight : Unit
             FindClosestEnemy();
         } else if (CurrentUnitState == UnitState.WalkToPoint) {
             FindClosestEnemy();
+            if (Vector3.Distance(transform.position, TargetPoint) < 0.5f) {
+                SetState(UnitState.Idle);
+            }
 
         } else if (CurrentUnitState == UnitState.WalkToEnemy) {
 
@@ -75,16 +79,38 @@ public class Knight : Unit
 
     public void SetState(UnitState unitState) {
         CurrentUnitState = unitState;
-        if (CurrentUnitState == UnitState.Idle) {
-            NavMeshAgent.stoppingDistance = 0.2f;
-        } else if (CurrentUnitState == UnitState.WalkToPoint) {
-            NavMeshAgent.stoppingDistance = 0.05f;
-        } else if (CurrentUnitState == UnitState.WalkToEnemy) {
-            NavMeshAgent.stoppingDistance = 1f;
-        } else if (CurrentUnitState == UnitState.Attack) {
-            NavMeshAgent.stoppingDistance = 1f;
-            _timer = 0;
+        switch (CurrentUnitState) {
+            case UnitState.Idle:
+                _animator.SetTrigger("Idle");
+                NavMeshAgent.stoppingDistance = 0.2f;
+                break;
+            case UnitState.WalkToPoint:
+                NavMeshAgent.SetDestination(TargetPoint);
+                _animator.SetTrigger("Walking");
+                NavMeshAgent.stoppingDistance = 0.05f;
+                break;
+            case UnitState.WalkToEnemy:
+                _animator.SetTrigger("Walking");
+                NavMeshAgent.stoppingDistance = 1f;
+                break;
+            case UnitState.Attack:
+                _animator.SetTrigger("Attack");
+                NavMeshAgent.stoppingDistance = 1f;
+                _timer = 0;
+                break;
+            default:
+                break;
         }
+        //if (CurrentUnitState == UnitState.Idle) {
+        //    NavMeshAgent.stoppingDistance = 0.2f;
+        //} else if (CurrentUnitState == UnitState.WalkToPoint) {
+        //    NavMeshAgent.stoppingDistance = 0.05f;
+        //} else if (CurrentUnitState == UnitState.WalkToEnemy) {
+        //    NavMeshAgent.stoppingDistance = 1f;
+        //} else if (CurrentUnitState == UnitState.Attack) {
+        //    NavMeshAgent.stoppingDistance = 1f;
+        //    _timer = 0;
+        //}
     }
 
     public void FindClosestEnemy() {
@@ -105,6 +131,12 @@ public class Knight : Unit
             TargetEnemy = closesEnemy;
             SetState(UnitState.WalkToEnemy);
         }
+    }
+
+    public override void WhenClickOnGround(Vector3 point) {
+        base.WhenClickOnGround(point);
+        TargetPoint = point;
+        SetState(UnitState.WalkToPoint);
     }
 
 #if UNITY_EDITOR

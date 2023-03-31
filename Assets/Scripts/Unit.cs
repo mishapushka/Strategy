@@ -13,6 +13,8 @@ public class Unit : SelectableObject {
     public GameObject HealthbarPrefab;
     private HealthBar _healthBar;
 
+    [SerializeField] protected Animator _animator;
+
     public override void Start() {
         base.Start();
         _maxHealth = Health;
@@ -31,9 +33,18 @@ public class Unit : SelectableObject {
         Health -= damageValue;
         _healthBar.SetHealth(Health, _maxHealth);
         if (Health <= 0) {
-            // Die
-            Destroy(gameObject);
+            Die();
+        } else {
+            _animator.SetTrigger("Hit");
         }
+    }
+
+    void Die() {
+        // +effect
+        Destroy(this);
+        Destroy(NavMeshAgent);
+        _animator.SetTrigger("Die");
+        Destroy(gameObject, 2f);
     }
 
     private void OnDestroy() {
